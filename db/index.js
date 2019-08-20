@@ -11,11 +11,10 @@ const connection = mysql.createConnection({
 });
 
 connection.connect((err) => {
-  console.log('1234');
   if (err) {
     console.log(err);
   } else {
-    console.log('Connected to PostGres');
+    console.log('Connected to MySQL');
   }
 });
 
@@ -23,7 +22,7 @@ let createTable = `CREATE TABLE IF NOT EXISTS budget (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     Bdate CHAR(25),
     Bdesc VARCHAR(500),
-    Bamount CHAR(10),
+    Bamount DECIMAL(12,2),
     Btransaction CHAR(50),
     BcatId INT,
     BaccountId INT,
@@ -34,11 +33,13 @@ let createTable = `CREATE TABLE IF NOT EXISTS budget (
 );`;
 let createCat = `CREATE TABLE IF NOT EXISTS Bcateg (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Bcat CHAR(50)
+    Bcat CHAR(50),
+    UNIQUE KEY(Bcat)
 );`;
 let createAcc = `CREATE TABLE IF NOT EXISTS Bacnt (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Baccount CHAR(50)
+    Baccount CHAR(50),
+    UNIQUE KEY(Baccount)
 );`;
 
 connection.query(createAcc, [], (err, results) => {

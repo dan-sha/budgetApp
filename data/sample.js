@@ -1,4 +1,4 @@
-[
+let sampleData = [
     {
       "Date": "01/01/2019",
       "Description": "Skyba",
@@ -4599,4 +4599,41 @@
       "Category": "Restaurants",
       "Account Name": "Credit Card 2"
     }
-  ]
+  ];
+
+module.exports = {
+
+  fillTables: function() {
+    let sampleArr = [];
+    let tempStr = '';
+    let catStr = '';
+    let accStr = '';
+    let tO = {};
+
+    for (let i = 0; i < sampleData.length; i++) {
+      tO = sampleData[i];
+      catStr = `SELECT id FROM Bcateg
+        WHERE Bcat = ("${tO.Category}")`;
+      accStr = `SELECT id FROM Bacnt
+        WHERE Baccount = ("${tO["Account Name"]}")`;
+      tempStr = `INSERT IGNORE INTO Bcateg (Bcat)
+        VALUES("${tO.Category}");
+        INSERT IGNORE INTO Bacnt (Baccount)
+        VALUES("${tO["Account Name"]}");
+        INSERT INTO budget (Bdate, Bdesc, Bamount, Btransaction, BcatId, BaccountId)
+        VALUES("${tO.Date}", "${tO.Description}", ${tO.Amount}, "${tO["Transaction Type"]}", (${catStr}), (${accStr}));`;
+        
+      sampleArr.push(tempStr);
+    }
+    return sampleArr.join('');
+  },
+
+  deleteTables: function() {
+    let queryStr = `DROP TABLE budget;
+      DROP TABLE Bcateg;
+      DROP TABLE Bacnt;`;
+    
+    return queryStr;
+  }
+
+};
