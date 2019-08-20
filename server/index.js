@@ -14,6 +14,17 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+app.get('/test/table/create/tables', (req, res) => {
+  let createTable = sample.createTables();
+  budget.test(createTable, (err, results) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Tables Created');
+      res.status(200).send('Created');
+    }
+  });
+});
 app.get('/test/table/clear/tables', (req, res) => {
   let delTableData = sample.deleteTables();
   budget.test(delTableData, (err, results) => {

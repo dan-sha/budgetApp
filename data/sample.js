@@ -1,3 +1,5 @@
+const mysql = require('mysql');
+
 let sampleData = [
     {
       "Date": "01/01/2019",
@@ -4634,6 +4636,34 @@ module.exports = {
       DROP TABLE Bacnt;`;
     
     return queryStr;
+  },
+
+  createTables: function() {
+    let createTable = `CREATE TABLE IF NOT EXISTS budget (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+        Bdate CHAR(25),
+        Bdesc VARCHAR(500),
+        Bamount DECIMAL(12,2),
+        Btransaction CHAR(50),
+        BcatId INT,
+        BaccountId INT,
+        FOREIGN KEY (BcatId)
+        REFERENCES Bcateg (id),
+        FOREIGN KEY (BaccountId)
+        REFERENCES Bacnt (id)
+    );`;
+    let createCat = `CREATE TABLE IF NOT EXISTS Bcateg (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        Bcat CHAR(50),
+        UNIQUE KEY(Bcat)
+    );`;
+    let createAcc = `CREATE TABLE IF NOT EXISTS Bacnt (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        Baccount CHAR(50),
+        UNIQUE KEY(Baccount)
+    );`;
+
+    return createCat + createAcc + createTable;
   }
 
 };
