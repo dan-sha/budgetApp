@@ -48,17 +48,15 @@ app.get('/test/table/fill/tables', (req, res) => {
   })
 })
 
-app.get('/test', (req, res) => {
-  let fillTableData = sample.fillTables();
-  res.status(200).send(fillTableData);
-//   budget.test((err, results) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log('postgres worked');
-//       res.status(200).send(results);
-//     }
-//   });
+app.get('/budget/all', (req, res) => {
+  budget.get((err, results) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Get All good');
+      res.status(200).send(results);
+    }
+  });
 });
 
 app.listen(3000, function() {
