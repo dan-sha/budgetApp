@@ -1,25 +1,56 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "../dist/styles.css";
+// import { runInThisContext } from "vm";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   user: username,
-    //   categories: [];
-    // };
+    this.state = {
+      categories: [],
+      accounts: '',
+      selectedCategory: ''
+
+    };
 
     //bind methods here:
+    this.selectCategory = this.selectCategory.bind(this);
+    this.submitClick = this.submitClick.bind(this);
   }
 
   //methods below:
-  componentDidMount() {}
+  componentDidMount() {
+    getCategories();
+    this.setState({
+      categories: 
+    })
+  }
 
-  selectCategory() {}
+  getCategories(callback) {
+    Axios.get('/categories')
+      .then(response => {
+        console.log(response);
+        callback(null, response.data.categories)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
-  submitClick() {}
+  }
+
+  selectCategory(event) {
+    this.setState({
+      selectedCategory: event.target.value;
+    })
+  }
+
+
+  submitClick(event) {
+    this.setState({
+      value: event.target.value;
+    })
+  }
 
   render() {
     return (
