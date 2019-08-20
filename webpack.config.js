@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
+const SRC_DIR = path.join(__dirname, '/client/src');
 
 const config = {
-  entry: './src/index.js',
+  entry: `${SRC_DIR}/index.jsx`,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
