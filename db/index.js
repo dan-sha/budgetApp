@@ -6,7 +6,8 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'student',
   password: 'student',
-  database: 'budget'
+  database: 'budget',
+  multipleStatements: true
 });
 
 connection.connect((err) => {
@@ -24,17 +25,45 @@ let createTable = `CREATE TABLE IF NOT EXISTS budget (
     Bdesc VARCHAR(500),
     Bamount CHAR(10),
     Btransaction CHAR(50),
-    Bcat CHAR(50),
+    BcatId INT,
+    BaccountId INT,
+    FOREIGN KEY (BcatId)
+    REFERENCES Bcateg (id),
+    FOREIGN KEY (BaccountId)
+    REFERENCES Bacnt (id)
+);`;
+let createCat = `CREATE TABLE IF NOT EXISTS Bcateg (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Bcat CHAR(50)
+);`;
+let createAcc = `CREATE TABLE IF NOT EXISTS Bacnt (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Baccount CHAR(50)
 );`;
 
-connection.query(createTable, [], (err, results) => {
+connection.query(createAcc, [], (err, results) => {
   if (err) {
     console.log('Table creation error');
     console.log(err);
   } else {
     console.log('Table thing good');
   }
-})
+});
+connection.query(createCat, [], (err, results) => {
+    if (err) {
+      console.log('Table creation error');
+      console.log(err);
+    } else {
+      console.log('Table thing good');
+    }
+  });
+  connection.query(createTable, [], (err, results) => {
+    if (err) {
+      console.log('Table creation error');
+      console.log(err);
+    } else {
+      console.log('Table thing good');
+    }
+  });
 
 exports.connection = connection;
