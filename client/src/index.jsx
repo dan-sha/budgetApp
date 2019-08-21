@@ -34,20 +34,19 @@ class App extends React.Component {
     this.getAccounts = this.getAccounts.bind(this);
     this.reRender = this.reRender.bind(this);
     this.filterCategories = this.filterCategories.bind(this);
+    this.filterAccounts = this.filterAccounts.bind(this);
   }
 
   // methods below:
   componentDidMount() {
     this.getEntries((err, results) => {
       this.setState({
-        entries: results
+        entries: results,
+        filtered: results
       });
     });
     this.getCategories();
     this.getAccounts();
-    this.setState({
-      filtered: this.state.entries
-    });
   }
 
   getEntries(callback) {
@@ -85,7 +84,16 @@ class App extends React.Component {
   }
 
   filterCategories(selection) {
-    let temp = filter.filterEntries(this.state.entries, "Category", selection);
+    let temp = helpers.filterEntries(this.state.entries, "Category", selection);
+    this.setState({ filtered: temp });
+  }
+
+  filterAccounts(selection) {
+    let temp = helpers.filterEntries(
+      this.state.entries,
+      "Account Name",
+      selection
+    );
     this.setState({ filtered: temp });
   }
 
@@ -108,6 +116,7 @@ class App extends React.Component {
             categories={this.state.categories}
             accounts={this.state.accounts}
             filterCategories={this.filterCategories}
+            filterAccounts={this.filterAccounts}
           />
         </div>
       </div>

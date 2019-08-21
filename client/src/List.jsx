@@ -8,6 +8,7 @@ class List extends React.Component {
       selected: ""
     };
     this.onChange = this.onChange.bind(this);
+    this.onChangeAccounts = this.onChangeAccounts.bind(this);
   }
 
   onChange(event) {
@@ -15,7 +16,15 @@ class List extends React.Component {
       selected: event.target.value
     });
     console.log(event.target.value);
-    filterCategories(event.target.value);
+    this.props.filterCategories(event.target.value);
+  }
+
+  onChangeAccounts(event) {
+    // this.setState({
+    //   selected: event.target.value
+    // });
+    console.log(event.target.value);
+    this.props.filterAccounts(event.target.value);
   }
 
   render() {
@@ -36,9 +45,11 @@ class List extends React.Component {
         </label>
         <label>
           Accounts
-          <select>
+          <select onChange={this.onChangeAccounts}>
             {this.props.accounts.map(account => {
-              return <option value={account.id}>{account.Baccount}</option>;
+              return (
+                <option value={account.Baccount}>{account.Baccount}</option>
+              );
             })}
           </select>
         </label>
