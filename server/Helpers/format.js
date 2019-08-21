@@ -6,6 +6,7 @@ module.exports = {
     let formatted = {};
     for (let i = 0; i < arr.length; i++) {
       formatted = {};
+      formatted["id"] = arr[i]["id"];
       formatted["Date"] = arr[i]["Bdate"];
       formatted["Description"] = arr[i]["Bdesc"];
       formatted["Amount"] = arr[i]["Bamount"];

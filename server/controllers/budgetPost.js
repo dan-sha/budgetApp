@@ -1,4 +1,5 @@
 const { budget } = require('../../db/sqldb.js');
+const format = require('../Helpers/format.js');
 
 module.exports = {
   addEntry: (req, res) => {
@@ -9,6 +10,6 @@ module.exports = {
       } else {
         res.status(201).send('Entry added');
       }
-    })
+    });
   }
 }

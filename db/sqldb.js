@@ -58,6 +58,31 @@ module.exports = {
             callback(null, results);
           }
         });
+    },
+
+    deleteOne: function(id, callback) {
+      let query = `DELETE FROM budget
+        WHERE budget.id = ${id};`;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          console.log(err);
+          callback(err);
+        } else {
+          callback(null, results);
+        }
+      });
+    },
+
+    putOne: function(obj, callback) {
+      let query = ``;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          console.log(err);
+          callback(err);
+        } else {
+          callback(null, results);
+        }
+      });
     }
 
   }

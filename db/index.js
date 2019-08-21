@@ -4,7 +4,8 @@ const { sqlUri } = require("./config.js");
 // const connection = mysql.createConnection(sqlUri);
 const connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
+  user: "student",
+  password: "student",
   database: "budget",
   multipleStatements: true
 });
