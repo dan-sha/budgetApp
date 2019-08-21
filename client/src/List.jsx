@@ -15,7 +15,7 @@ class List extends React.Component {
       selected: event.target.value
     });
     console.log(event.target.value);
-    filterCategories(event.target.value);
+    this.props.filterCategories(event.target.value);
   }
 
   render() {

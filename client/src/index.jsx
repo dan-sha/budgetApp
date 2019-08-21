@@ -40,14 +40,12 @@ class App extends React.Component {
   componentDidMount() {
     this.getEntries((err, results) => {
       this.setState({
-        entries: results
+        entries: results,
+        filtered: results
       });
     });
     this.getCategories();
     this.getAccounts();
-    this.setState({
-      filtered: this.state.entries
-    });
   }
 
   getEntries(callback) {
@@ -85,7 +83,7 @@ class App extends React.Component {
   }
 
   filterCategories(selection) {
-    let temp = filter.filterEntries(this.state.entries, "Category", selection);
+    let temp = helpers.filterEntries(this.state.entries, "Category", selection);
     this.setState({ filtered: temp });
   }
 
