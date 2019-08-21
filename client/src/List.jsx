@@ -13,6 +13,8 @@ const List = props => {
               <div>Description: {entry.Description}</div>
               <div>Amount: {entry.Amount}</div>
               <div>Type: {entry["Transaction Type"]}</div>
+              <div>Category: {entry.Category}</div>
+              <div>Account Name: {entry["Account Name"]}</div>
             </li>
           );
         })}

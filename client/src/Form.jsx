@@ -1,5 +1,6 @@
 //Form for user to enter in new expense
 import React from "react";
+import Axios from "axios";
 
 class Form extends React.Component {
   constructor(props) {
@@ -8,54 +9,114 @@ class Form extends React.Component {
       date: "",
       description: "",
       amount: "",
-      transactionType: ""
+      transactionType: "",
+      category: "",
+      accountName: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.submitEntryClick = this.submitEntryClick.bind(this);
+  }
+
+  handleChange(event) {
+    let placeholder = {};
+    placeholder[event.target.name] = event.target.value;
+    this.setState(placeholder);
+  }
+
+  submitEntryClick() {
+    let newobj = {};
+    newobj.Date = this.state.date;
+    newobj.Description = this.state.description;
+    newobj.Amount = this.state.amount;
+    newobj["Transaction Type"] = this.state.transactionType;
+    newobj.Category = this.state.category;
+    newobj["Account Name"] = this.state.accountName;
+
+    Axios.post("/budget/addEntry", newobj)
+      .then(() => {
+        this.setState({
+          date: "",
+          description: "",
+          amount: "",
+          transactionType: "",
+          category: "",
+          accountName: ""
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.submitFormHandler}>
           <label>
-            Date
+            Date:
             <input
+              name="date"
               type="text"
               placeholder="mm/dd/yyyy"
-              value=""
+              value={this.state.date}
+              onChange={this.handleChange}
             />
           </label>
           <div>
-          <label>
-            Expense Description:
-            <input type="text" value=""/>
-          </label>
+            <label>
+              Expense Description:
+              <input
+                name="description"
+                type="text"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
+            </label>
           </div>
           <div>
-          <label>
-            Enter Amount:
-            <input type="text" value="" onChange={this.handleChange}/>
-          </label>
+            <label>
+              Enter Amount:
+              <input
+                name="amount"
+                type="text"
+                value={this.state.amount}
+                onChange={this.handleChange}
+              />
+            </label>
           </div>
           <div onChange={this.handleChange}>
             <label>Transaction Type:</label>
-            <label class="container">
-              Debit
+            <input
+              name="transactionType"
+              type="text"
+              value={this.state.transactionType}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            <label>
+              Category:
               <input
-                type="radio"
-                checked="checked"
-                name="radio"
-                value="debit"
+                name="category"
+                type="text"
+                value={this.state.category}
+                onChange={this.handleChange}
               />
-              <span class="checkmark" />
             </label>
-            <label class="container">
-              Credit
-              <input type="radio" name="radio" value="credit" />
-              <span class="checkmark" />
+          </div>
+          <div>
+            <label>
+              Account Name:
+              <input
+                name="accountName"
+                type="text"
+                value={this.state.accountName}
+                onChange={this.handleChange}
+              />
             </label>
           </div>
         </form>
-        <button onClick={this.submitClick}></button>
+        <button onClick={this.submitEntryClick} />
       </div>
     );
   }
