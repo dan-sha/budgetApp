@@ -12,4 +12,8 @@ router.get('/test/table/fill/tables', budgetTest.fillTables);
 
 router.post('/budget/addEntry', budgetPost.addEntry);
 
+router.put('/budget/update');
+
+router.delete('/budget/deleteEntry');
+
 module.exports = router;
