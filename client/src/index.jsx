@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "../dist/styles.css";
-// import { runInThisContext } from "vm";
+import Form from "./Form.jsx";
+import List from "./List.jsx";
+const Axios = require("axios");
 
 class App extends React.Component {
   constructor(props) {
@@ -9,48 +11,65 @@ class App extends React.Component {
 
     this.state = {
       categories: [],
-      accounts: '',
-      selectedCategory: ''
-
+      selectedCategory: "",
+      entries: [
+        {
+          date: "",
+          description: "",
+          amount: "",
+          transactionType: "",
+          accountName: "",
+          category: ""
+          // setRadioButton: ""
+        }
+      ]
     };
 
     //bind methods here:
-    this.selectCategory = this.selectCategory.bind(this);
+    this.getEntries = this.getEntries.bind(this);
+    //this.selectCategory = this.selectCategory.bind(this);
     this.submitClick = this.submitClick.bind(this);
+    //this.setRadioButton = this.setRadioButton.bind(this);
   }
 
-  //methods below:
+  // methods below:
   componentDidMount() {
-    getCategories();
-    this.setState({
-      categories: 
-    })
+    this.getEntries((err, results)=>{
+      this.setState({
+        entries: results
+      })
+    });
   }
 
-  getCategories(callback) {
-    Axios.get('/categories')
+  getEntries(callback) {
+    Axios.get("/budget/all")
       .then(response => {
         console.log(response);
-        callback(null, response.data.categories)
+        callback(null, response.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-      })
-
+      });
   }
 
-  selectCategory(event) {
-    this.setState({
-      selectedCategory: event.target.value;
-    })
-  }
-
+  // selectCategory(event) {
+  //   this.setState({
+  //     selectedCategory: event.target.value
+  //   });
+  // }
 
   submitClick(event) {
-    this.setState({
-      value: event.target.value;
-    })
+    console.log(event.target);
+    // this.setState({
+    //   value: event.target.value
+    // });
   }
+
+  // setRadioButton(event) {
+  //   this.setState({
+  //     value: event.target.value
+  //   });
+  // }
 
   render() {
     return (
@@ -60,11 +79,14 @@ class App extends React.Component {
         </header>
 
         <div>
-          <Search
-            categories={this.props.categories}
-            selectCategory={this.selectCategory}
-            submitClick={this.submitClick}
-          />
+          {/* <Search
+              categories={this.props.categories}
+              selectCategory={this.selectCategory}
+              submitClick={this.submitClick}
+            /> */}
+          <Form onSubmit={this.getEntries} submitClick={this.submitClick} />
+          <List entries={this.state.entries}/>
+
         </div>
       </div>
     );
