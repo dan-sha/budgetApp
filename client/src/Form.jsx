@@ -1,29 +1,64 @@
 //Form for user to enter in new expense
-import React from ('react');
+import React from "react";
 
-const ExpenseForm = props => (
-  <div>
-    <form>
-      <label>Date</label>
-      <label>
-        Expense Description:
-        <input type="text" onChange={event => this.handleChange(event)} />
-      </label>
-      <label>
-        Enter Amount:
-        <input type="text" onChange={event => this.handleChange(event)} />
-      </label>
-      <label>Transaction Type:</label>
-      <label class='container'>Debit
-        <input type="checkbox" checked="checked"></input>
-        <span class="checkmark"></span>
-      </label>
-      <label class='container'>Credit
-        <input type="checkbox"></input>
-        <span class="checkmark"></span>
-      </label>
-    </form>
-  </div>
-);
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: "",
+      description: "",
+      amount: "",
+      transactionType: ""
+    };
+  }
 
-export defaults Form;
+  render() {
+    return (
+      <div>
+        <form>
+          <label>
+            Date
+            <input
+              type="text"
+              placeholder="mm/dd/yyyy"
+              value=""
+            />
+          </label>
+          <div>
+          <label>
+            Expense Description:
+            <input type="text" value=""/>
+          </label>
+          </div>
+          <div>
+          <label>
+            Enter Amount:
+            <input type="text" value="" onChange={this.handleChange}/>
+          </label>
+          </div>
+          <div onChange={this.handleChange}>
+            <label>Transaction Type:</label>
+            <label class="container">
+              Debit
+              <input
+                type="radio"
+                checked="checked"
+                name="radio"
+                value="debit"
+              />
+              <span class="checkmark" />
+            </label>
+            <label class="container">
+              Credit
+              <input type="radio" name="radio" value="credit" />
+              <span class="checkmark" />
+            </label>
+          </div>
+        </form>
+        <button onClick={this.submitClick}></button>
+      </div>
+    );
+  }
+}
+
+export default Form;
