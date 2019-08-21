@@ -28,16 +28,15 @@ class App extends React.Component {
     //bind methods here:
     this.getEntries = this.getEntries.bind(this);
     //this.selectCategory = this.selectCategory.bind(this);
-    this.submitClick = this.submitClick.bind(this);
     this.handleRadioButton = this.handleRadioButton.bind(this);
   }
 
   // methods below:
   componentDidMount() {
-    this.getEntries((err, results)=>{
+    this.getEntries((err, results) => {
       this.setState({
         entries: results
-      })
+      });
     });
   }
 
@@ -57,25 +56,10 @@ class App extends React.Component {
   //   });
   // }
 
-  submitClick(event) {
-    console.log(event.target);
-    this.setState({
-      date: event.target.value,
-      description: event.target.value,
-      amount: event.target.value,
-      transactionType: event.target.value,
-      
-    });
-  }
-
   handleRadioButton(event) {
     this.setState({
       transactionType: event.target.value
     });
-  }
-
-  handleChange(){
-    
   }
 
   render() {
@@ -91,11 +75,11 @@ class App extends React.Component {
               selectCategory={this.selectCategory}
               submitClick={this.submitClick}
             /> */}
-          <Form onSubmit={this.getEntries} 
-            submitClick={this.submitClick} 
-            handbleRadioButton={this.handleRadioButton}/>
-          <List entries={this.state.entries}/>
-
+          <Form
+            onSubmit={this.getEntries}
+            handbleRadioButton={this.handleRadioButton}
+          />
+          <List entries={this.state.entries} />
         </div>
       </div>
     );

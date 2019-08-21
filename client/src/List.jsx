@@ -1,22 +1,26 @@
 //list to show all entries
-import React from 'react';
+import React from "react";
 
-const List = (props) => {
-  console.log('here!!')
-  console.log(props.entries);
+const List = props => {
   return (
     <div>
       <h3>Recent Transactions:</h3>
       <ol>
         {props.entries.map(entry => {
-          return <li>Date: {entry.Bdate}
-          <div>Description: {entry.Bdesc}</div>
-          <div>Amount: {entry.Bamount}</div>
-          <div>Type: {entry.Btransaction}</div></li>
+          return (
+            <li>
+              Date: {entry.Date}
+              <div>Description: {entry.Description}</div>
+              <div>Amount: {entry.Amount}</div>
+              <div>Type: {entry["Transaction Type"]}</div>
+              <div>Category: {entry.Category}</div>
+              <div>Account Name: {entry["Account Name"]}</div>
+            </li>
+          );
         })}
       </ol>
     </div>
-  )
-}
+  );
+};
 
 export default List;
