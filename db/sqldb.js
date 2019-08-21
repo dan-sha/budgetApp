@@ -1,5 +1,5 @@
 const db = require('./index.js');
-const mysql = require('mysql');
+// const mysql = require('mysql');
 const {sqlUri} = require('./config');
 
 module.exports = {
@@ -39,7 +39,25 @@ module.exports = {
     },
 
     addOne: function(budgetObj, callback) {
-      callback(null);
+      let catStr = `SELECT id FROM Bcateg
+        WHERE Bcat = ("${budgetObj.Category}")`;
+      let accStr = `SELECT id FROM Bacnt
+        WHERE Baccount = ("${budgetObj["Account Name"]}")`;
+      let query = `INSERT IGNORE INTO Bcateg (Bcat)
+        VALUES("${budgetObj.Category}");
+        INSERT IGNORE INTO Bacnt (Baccount)
+        VALUES("${budgetObj["Account Name"]}");
+        INSERT INTO budget (Bdate, Bdesc, Bamount, Btransaction, BcatId, BaccountId)
+        VALUES("${budgetObj.Date}", "${budgetObj.Description}", ${budgetObj.Amount}, "${budgetObj["Transaction Type"]}", (${catStr}), (${accStr}));`;
+      
+        db.connection.query(query, [], (err, results) => {
+          if (err) {
+            console.log(err);
+            callback(err);
+          } else {
+            callback(null, results);
+          }
+        });
     }
 
   }
