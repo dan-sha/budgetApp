@@ -5,7 +5,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: "",
+      date: "",
       description: "",
       amount: "",
       transactionType: ""
@@ -22,17 +22,20 @@ class Form extends React.Component {
               type="text"
               placeholder="mm/dd/yyyy"
               value=""
-              onChange={this.props.submitClick}
             />
           </label>
+          <div>
           <label>
             Expense Description:
-            <input type="text" value="" onChange={this.props.submitClick} />
+            <input type="text" value=""/>
           </label>
+          </div>
+          <div>
           <label>
             Enter Amount:
-            <input type="text" value="" onChange={this.props.submitClick} />
+            <input type="text" value="" onChange={this.handleChange}/>
           </label>
+          </div>
           <div onChange={this.handleChange}>
             <label>Transaction Type:</label>
             <label class="container">
@@ -52,6 +55,7 @@ class Form extends React.Component {
             </label>
           </div>
         </form>
+        <button onClick={this.submitClick}></button>
       </div>
     );
   }

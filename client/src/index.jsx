@@ -29,7 +29,7 @@ class App extends React.Component {
     this.getEntries = this.getEntries.bind(this);
     //this.selectCategory = this.selectCategory.bind(this);
     this.submitClick = this.submitClick.bind(this);
-    //this.setRadioButton = this.setRadioButton.bind(this);
+    this.handleRadioButton = this.handleRadioButton.bind(this);
   }
 
   // methods below:
@@ -44,7 +44,6 @@ class App extends React.Component {
   getEntries(callback) {
     Axios.get("/budget/all")
       .then(response => {
-        console.log(response);
         callback(null, response.data);
       })
       .catch(err => {
@@ -60,16 +59,24 @@ class App extends React.Component {
 
   submitClick(event) {
     console.log(event.target);
-    // this.setState({
-    //   value: event.target.value
-    // });
+    this.setState({
+      date: event.target.value,
+      description: event.target.value,
+      amount: event.target.value,
+      transactionType: event.target.value,
+      
+    });
   }
 
-  // setRadioButton(event) {
-  //   this.setState({
-  //     value: event.target.value
-  //   });
-  // }
+  handleRadioButton(event) {
+    this.setState({
+      transactionType: event.target.value
+    });
+  }
+
+  handleChange(){
+    
+  }
 
   render() {
     return (
@@ -84,7 +91,9 @@ class App extends React.Component {
               selectCategory={this.selectCategory}
               submitClick={this.submitClick}
             /> */}
-          <Form onSubmit={this.getEntries} submitClick={this.submitClick} />
+          <Form onSubmit={this.getEntries} 
+            submitClick={this.submitClick} 
+            handbleRadioButton={this.handleRadioButton}/>
           <List entries={this.state.entries}/>
 
         </div>
