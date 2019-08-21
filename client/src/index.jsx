@@ -4,6 +4,7 @@ import "../dist/styles.css";
 import Form from "./Form.jsx";
 import List from "./List.jsx";
 const Axios = require("axios");
+import helpers from "../../server/Helpers/filter.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class App extends React.Component {
     this.state = {
       categories: [],
       selectedCategory: "",
+      accounts: [],
+      filtered: [],
       entries: [
         {
           date: "",
@@ -27,8 +30,10 @@ class App extends React.Component {
 
     //bind methods here:
     this.getEntries = this.getEntries.bind(this);
-    //this.selectCategory = this.selectCategory.bind(this);
-    this.handleRadioButton = this.handleRadioButton.bind(this);
+    this.getCategories = this.getCategories.bind(this);
+    this.getAccounts = this.getAccounts.bind(this);
+    this.reRender = this.reRender.bind(this);
+    this.filterCategories = this.filterCategories.bind(this);
   }
 
   // methods below:
@@ -37,6 +42,11 @@ class App extends React.Component {
       this.setState({
         entries: results
       });
+    });
+    this.getCategories();
+    this.getAccounts();
+    this.setState({
+      filtered: this.state.entries
     });
   }
 
@@ -50,16 +60,33 @@ class App extends React.Component {
       });
   }
 
-  // selectCategory(event) {
-  //   this.setState({
-  //     selectedCategory: event.target.value
-  //   });
-  // }
-
-  handleRadioButton(event) {
-    this.setState({
-      transactionType: event.target.value
+  getCategories() {
+    Axios.get("/budget/allCategories").then(data => {
+      let tempObj = { categories: data.data };
+      this.setState(tempObj);
     });
+  }
+
+  getAccounts() {
+    Axios.get("/budget/allAccounts").then(data => {
+      console.log(data);
+      let tempObj2 = { accounts: data.data };
+      this.setState(tempObj2);
+    });
+  }
+
+  reRender() {
+    this.getEntries((err, results) => {
+      this.setState({
+        entries: results
+      });
+    });
+    this.getCategories();
+  }
+
+  filterCategories(selection) {
+    let temp = filter.filterEntries(this.state.entries, "Category", selection);
+    this.setState({ filtered: temp });
   }
 
   render() {
@@ -75,11 +102,13 @@ class App extends React.Component {
               selectCategory={this.selectCategory}
               submitClick={this.submitClick}
             /> */}
-          <Form
-            onSubmit={this.getEntries}
-            handbleRadioButton={this.handleRadioButton}
+          <Form onSubmit={this.getEntries} reRender={this.reRender} />
+          <List
+            entries={this.state.filtered}
+            categories={this.state.categories}
+            accounts={this.state.accounts}
+            filterCategories={this.filterCategories}
           />
-          <List entries={this.state.entries} />
         </div>
       </div>
     );

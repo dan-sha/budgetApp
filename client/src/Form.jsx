@@ -43,6 +43,10 @@ class Form extends React.Component {
           accountName: ""
         });
       })
+      .then(() => {
+        console.log("1232454");
+        this.props.reRender();
+      })
       .catch(err => {
         console.log(err);
       });
@@ -89,6 +93,7 @@ class Form extends React.Component {
             <input
               name="transactionType"
               type="text"
+              placeholder="Debit or Credit"
               value={this.state.transactionType}
               onChange={this.handleChange}
             />
@@ -116,7 +121,7 @@ class Form extends React.Component {
             </label>
           </div>
         </form>
-        <button onClick={this.submitEntryClick} />
+        <button onClick={this.submitEntryClick}>SUBMIT</button>
       </div>
     );
   }
