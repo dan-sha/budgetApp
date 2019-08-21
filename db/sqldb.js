@@ -71,6 +71,18 @@ module.exports = {
           callback(null, results);
         }
       });
+    },
+
+    putOne: function(obj, callback) {
+      let query = ``;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          console.log(err);
+          callback(err);
+        } else {
+          callback(null, results);
+        }
+      });
     }
 
   }
