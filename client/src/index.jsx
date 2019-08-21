@@ -34,6 +34,7 @@ class App extends React.Component {
     this.getAccounts = this.getAccounts.bind(this);
     this.reRender = this.reRender.bind(this);
     this.filterCategories = this.filterCategories.bind(this);
+    this.filterAccounts = this.filterAccounts.bind(this);
   }
 
   // methods below:
@@ -87,6 +88,15 @@ class App extends React.Component {
     this.setState({ filtered: temp });
   }
 
+  filterAccounts(selection) {
+    let temp = helpers.filterEntries(
+      this.state.entries,
+      "Account Name",
+      selection
+    );
+    this.setState({ filtered: temp });
+  }
+
   render() {
     return (
       <div>
@@ -106,6 +116,7 @@ class App extends React.Component {
             categories={this.state.categories}
             accounts={this.state.accounts}
             filterCategories={this.filterCategories}
+            filterAccounts={this.filterAccounts}
           />
         </div>
       </div>
