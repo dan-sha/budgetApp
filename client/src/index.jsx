@@ -4,6 +4,7 @@ import "../dist/styles.css";
 import Form from "./Form.jsx";
 import List from "./List.jsx";
 const Axios = require("axios");
+import helpers from "../../server/Helpers/filter.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends React.Component {
       categories: [],
       selectedCategory: "",
       accounts: [],
+      filtered: [],
       entries: [
         {
           date: "",
@@ -31,6 +33,7 @@ class App extends React.Component {
     this.getCategories = this.getCategories.bind(this);
     this.getAccounts = this.getAccounts.bind(this);
     this.reRender = this.reRender.bind(this);
+    this.filterCategories = this.filterCategories.bind(this);
   }
 
   // methods below:
@@ -42,6 +45,9 @@ class App extends React.Component {
     });
     this.getCategories();
     this.getAccounts();
+    this.setState({
+      filtered: this.state.entries
+    });
   }
 
   getEntries(callback) {
@@ -78,6 +84,11 @@ class App extends React.Component {
     this.getCategories();
   }
 
+  filterCategories(selection) {
+    let temp = filter.filterEntries(this.state.entries, "Category", selection);
+    this.setState({ filtered: temp });
+  }
+
   render() {
     return (
       <div>
@@ -93,9 +104,10 @@ class App extends React.Component {
             /> */}
           <Form onSubmit={this.getEntries} reRender={this.reRender} />
           <List
-            entries={this.state.entries}
+            entries={this.state.filtered}
             categories={this.state.categories}
             accounts={this.state.accounts}
+            filterCategories={this.filterCategories}
           />
         </div>
       </div>
