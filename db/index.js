@@ -1,20 +1,19 @@
-const mysql = require('mysql');
-const { sqlUri } = require('./config.js');
+const mysql = require("mysql");
+const { sqlUri } = require("./config.js");
 
 // const connection = mysql.createConnection(sqlUri);
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'student',
-  password: 'student',
-  database: 'budget',
+  host: "localhost",
+  user: "root",
+  database: "budget",
   multipleStatements: true
 });
 
-connection.connect((err) => {
+connection.connect(err => {
   if (err) {
     console.log(err);
   } else {
-    console.log('Connected to MySQL');
+    console.log("Connected to MySQL");
   }
 });
 
@@ -44,27 +43,27 @@ let createAcc = `CREATE TABLE IF NOT EXISTS Bacnt (
 
 connection.query(createAcc, [], (err, results) => {
   if (err) {
-    console.log('Table creation error');
+    console.log("Table creation error");
     console.log(err);
   } else {
-    console.log('Table thing good');
+    console.log("Table thing good");
   }
 });
 connection.query(createCat, [], (err, results) => {
-    if (err) {
-      console.log('Table creation error');
-      console.log(err);
-    } else {
-      console.log('Table thing good');
-    }
-  });
-  connection.query(createTable, [], (err, results) => {
-    if (err) {
-      console.log('Table creation error');
-      console.log(err);
-    } else {
-      console.log('Table thing good');
-    }
-  });
+  if (err) {
+    console.log("Table creation error");
+    console.log(err);
+  } else {
+    console.log("Table thing good");
+  }
+});
+connection.query(createTable, [], (err, results) => {
+  if (err) {
+    console.log("Table creation error");
+    console.log(err);
+  } else {
+    console.log("Table thing good");
+  }
+});
 
 exports.connection = connection;
