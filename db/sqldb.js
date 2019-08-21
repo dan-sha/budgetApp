@@ -16,30 +16,18 @@ module.exports = {
       });
     },
 
-    get: function(callback) {
-      let queryStr = 'SELECT * FROM budget';
-      db.connection.query(queryStr, [], (err, results) => {
-        if (err) {
-          console.log(err);
-          callback(err);
-        } else {
-          callback(null, results);
-        }
-      });
-    },
-    getCategories: function(callback) {
-      let queryStr = 'SELECT * FROM Bcateg';
-      db.connection.query(queryStr, [], (err, results) => {
-        if (err) {
-          console.log(err);
-          callback(err);
-        } else {
-          callback(null, results);
-        }
-      });
-    },
-    getAccounts: function(callback) {
-      let queryStr = 'SELECT * FROM Bacnt';
+    get: function(str, callback) {
+      let queryStr = '';
+      if (str === 'budget') {
+        queryStr = `
+        SELECT t.*, Bacnt.Baccount 
+        FROM (SELECT budget.*, Bcateg.Bcat 
+        FROM budget LEFT JOIN Bcateg ON budget.BcatId = Bcateg.id) t 
+        LEFT JOIN Bacnt ON t.BaccountId = Bacnt.id;
+        `;
+      } else {
+        queryStr = 'SELECT * FROM ' +  str;
+      }
       db.connection.query(queryStr, [], (err, results) => {
         if (err) {
           console.log(err);
