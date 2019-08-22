@@ -124,22 +124,41 @@ class App extends React.Component {
     // console.log(PieChart);
     let chart = null;
     if (this.state.entries.length === 0) {
-      chart = <div><img src="goldencoin.png" height="40%" width="40%"></img></div>;
+      chart = (
+        <div>
+          <img src="goldencoin.png" height="25%" width="25%" />
+        </div>
+      );
     } else {
-      chart = <PieChart data={data} width={800} height={600} margin={{ top: 10, bottom: 10, left: 100, right: 100 }} sort={sort} tooltipOffset={{ top: 530, left: 300 }} tooltipMode={"fixed"} tooltipHtml={tooltipPie} />;
+      chart = (
+        <PieChart
+          data={data}
+          width={800}
+          height={600}
+          margin={{ top: 10, bottom: 10, left: 100, right: 100 }}
+          sort={sort}
+          tooltipOffset={{ top: 530, left: 300 }}
+          tooltipMode={"fixed"}
+          tooltipHtml={tooltipPie}
+        />
+      );
     }
 
     return (
       <div>
         <header>
           <h1>Budget Tracker</h1>
-          <h2>Balance: {format.findBalance(this.state.entries)}</h2>
+          <h2 class="balanceline">Balance: {format.findBalance(this.state.entries)}</h2>
         </header>
 
         <div class="chart">
           {chart}
           <div class="form">
-            <Form entries={this.state.filtered} onSubmit={this.getEntries} reRender={this.reRender} />
+            <Form
+              entries={this.state.filtered}
+              onSubmit={this.getEntries}
+              reRender={this.reRender}
+            />
           </div>
           <List
             entries={this.state.filtered}

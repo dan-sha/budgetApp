@@ -8,8 +8,8 @@
 }
 
 body {
-  color: orange;
-  background-color: white;
+  color: #df6801;
+  background-color: #b6dfb7;
   font-family: Andale Mono, sans-serif;
   text-align: center;
 }
@@ -93,4 +93,12 @@ button {
 
 .labelname {
   font-size: 20px;
+}
+
+img {
+  margin: 20px;
+}
+
+.balanceline {
+  font-size: 50px;
 }
