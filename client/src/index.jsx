@@ -121,18 +121,20 @@ class App extends React.Component {
     return (
       <div>
         <header>
-          <h1>Hello Budget App</h1>
+          <h1>Budget Tracker</h1>
         </header>
 
-        <div>
+        <div class="chart">
           <PieChart
             data={data}
-            width={600}
+            width={800}
             height={400}
-            margin={{top: 10, bottom: 10, left: 100, right: 100}}
+            margin={{top: 10, bottom: 10, left: 50, right: 50}}
             sort={sort}
           />
+          <div class="form">
           <Form onSubmit={this.getEntries} reRender={this.reRender} />
+          </div>
           <List
             entries={this.state.filtered}
             categories={this.state.categories}

@@ -29,7 +29,7 @@ class List extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="list">
         <h3>Recent Transactions:</h3>
         <label>
           Categories
@@ -53,11 +53,11 @@ class List extends React.Component {
             })}
           </select>
         </label>
-        <ol>
+        <ol class="listbody">
           {this.props.entries.map(entry => {
             return (
-              <li>
-                Date: {entry.Date}
+              <li id="entrylist">
+                <div>Date: {entry.Date} </div>
                 <div>Description: {entry.Description}</div>
                 <div>Amount: {entry.Amount}</div>
                 <div>Type: {entry["Transaction Type"]}</div>
