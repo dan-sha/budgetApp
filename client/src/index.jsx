@@ -3,7 +3,10 @@ import ReactDOM from "react-dom";
 import "../dist/styles.css";
 import Form from "./Form.jsx";
 import List from "./List.jsx";
+// import PieChart from "./PieChart.jsx";
 const Axios = require("axios");
+const d3 = require("d3");
+const ReactD3 = require("react-d3-components");
 import helpers from "../../server/Helpers/filter.js";
 
 class App extends React.Component {
@@ -97,7 +100,22 @@ class App extends React.Component {
     this.setState({ filtered: temp });
   }
 
+  // var PieChart = ReactD3.PieChart;
+  // var data = {
+  //   label: 'somethingA',
+  //   values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
+  // };
+  // var sort = null;
+
   render() {
+
+    var PieChart = ReactD3.PieChart;
+    var data = {
+      label: 'somethingA',
+      values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
+    };
+    var sort = null;
+
     return (
       <div>
         <header>
@@ -105,11 +123,13 @@ class App extends React.Component {
         </header>
 
         <div>
-          {/* <Search
-              categories={this.props.categories}
-              selectCategory={this.selectCategory}
-              submitClick={this.submitClick}
-            /> */}
+          <PieChart
+            data={data}
+            width={600}
+            height={400}
+            margin={{top: 10, bottom: 10, left: 100, right: 100}}
+            sort={sort}
+          />
           <Form onSubmit={this.getEntries} reRender={this.reRender} />
           <List
             entries={this.state.filtered}
@@ -126,3 +146,23 @@ class App extends React.Component {
 
 var mountNode = document.getElementById("app");
 ReactDOM.render(<App />, mountNode);
+
+
+// var PieChart = ReactD3.PieChart;
+ 
+// var data = {
+//         label: 'somethingA',
+//         values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
+// };
+ 
+// var sort = null; // d3.ascending, d3.descending, func(a,b) { return a - b; }, etc...
+ 
+// ReactDOM.render(<PieChart
+//                 data={data}
+//                 width={600}
+//                 height={400}
+//                 margin={{top: 10, bottom: 10, left: 100, right: 100}}
+//                 sort={sort}
+//                 />,
+//             document.getElementById('piechart')
+// );
