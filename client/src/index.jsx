@@ -110,10 +110,9 @@ class App extends React.Component {
   // var sort = null;
 
   render() {
-
     var PieChart = ReactD3.PieChart;
     var data = {
-      label: 'SomethingA',
+      label: "SomethingA",
       values: format.pieFormat(this.state.filtered)
     };
     var sort = null;
@@ -125,21 +124,23 @@ class App extends React.Component {
     return (
       <div>
         <header>
-          <h1>Hello Budget App</h1>
+          <h1>Budget Tracker</h1>
         </header>
 
-        <div>
+        <div class="chart">
           <PieChart
             data={data}
             width={800}
             height={600}
-            margin={{top: 10, bottom: 10, left: 100, right: 100}}
+            margin={{ top: 10, bottom: 10, left: 100, right: 100 }}
             sort={sort}
-            tooltipOffset={{top: 530, left: 300}}
-            tooltipMode={'fixed'}
+            tooltipOffset={{ top: 530, left: 300 }}
+            tooltipMode={"fixed"}
             tooltipHtml={tooltipPie}
           />
-          <Form onSubmit={this.getEntries} reRender={this.reRender} />
+          <div class="form">
+            <Form onSubmit={this.getEntries} reRender={this.reRender} />
+          </div>
           <List
             entries={this.state.filtered}
             categories={this.state.categories}
@@ -156,16 +157,15 @@ class App extends React.Component {
 var mountNode = document.getElementById("app");
 ReactDOM.render(<App />, mountNode);
 
-
 // var PieChart = ReactD3.PieChart;
- 
+
 // var data = {
 //         label: 'somethingA',
 //         values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
 // };
- 
+
 // var sort = null; // d3.ascending, d3.descending, func(a,b) { return a - b; }, etc...
- 
+
 // ReactDOM.render(<PieChart
 //                 data={data}
 //                 width={600}
