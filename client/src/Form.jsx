@@ -23,7 +23,8 @@ class Form extends React.Component {
     this.setState(placeholder);
   }
 
-  submitEntryClick() {
+  submitEntryClick(e) {
+    e.preventDefault();
     let newobj = {};
     newobj.Date = this.state.date;
     newobj.Description = this.state.description;
@@ -34,14 +35,15 @@ class Form extends React.Component {
 
     Axios.post("/budget/addEntry", newobj)
       .then(() => {
-        this.setState({
+        let temp = {
           date: "",
           description: "",
           amount: "",
           transactionType: "",
           category: "",
           accountName: ""
-        });
+        };
+        this.setState(temp);
       })
       .then(() => {
         console.log("1232454");
