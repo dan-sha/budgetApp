@@ -56,74 +56,75 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.submitFormHandler}>
-          <label>
-            Date:
-            <input
-              name="date"
-              type="text"
-              placeholder="mm/dd/yyyy"
-              value={this.state.date}
-              onChange={this.handleChange}
-            />
-          </label>
-          <div>
+      <div class="container1">
+        <div class="formline">
+          <form onSubmit={this.submitFormHandler}>
             <label>
-              Expense Description:
+              Date:
               <input
-                name="description"
+                name="date"
                 type="text"
-                value={this.state.description}
+                placeholder="mm/dd/yyyy"
+                value={this.state.date}
                 onChange={this.handleChange}
               />
             </label>
-          </div>
-          <div>
-            <label>
-              Enter Amount:
+            <div class="formline">
+              <label>
+                Expense Description:
+                <input
+                  name="description"
+                  type="text"
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <div class="formline">
+              <label>
+                Enter Amount:
+                <input
+                  name="amount"
+                  type="text"
+                  value={this.state.amount}
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <div class="formline" onChange={this.handleChange}>
+              <label>Transaction Type:</label>
               <input
-                name="amount"
+                name="transactionType"
                 type="text"
-                value={this.state.amount}
+                placeholder="Debit or Credit"
+                value={this.state.transactionType}
                 onChange={this.handleChange}
               />
-            </label>
-          </div>
-          <div onChange={this.handleChange}>
-            <label>Transaction Type:</label>
-            <input
-              name="transactionType"
-              type="text"
-              placeholder="Debit or Credit"
-              value={this.state.transactionType}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label>
-              Category:
-              <input
-                name="category"
-                type="text"
-                value={this.state.category}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Account Name:
-              <input
-                name="accountName"
-                type="text"
-                value={this.state.accountName}
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-        </form>
-        <button onClick={this.submitEntryClick}>SUBMIT</button>
+            </div>
+            <div class="formline">
+              <label>
+                Category:
+                <input
+                  name="category"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <div class="formline">
+              <label>
+                Account Name:
+                <input
+                  name="accountName"
+                  type="text"
+                  value={this.state.accountName}
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+          </form>
+          <button onClick={this.submitEntryClick}>SUBMIT</button>
+        </div>
       </div>
     );
   }
