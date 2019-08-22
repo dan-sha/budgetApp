@@ -23,7 +23,8 @@ module.exports = {
         SELECT t.*, Bacnt.Baccount 
         FROM (SELECT budget.*, Bcateg.Bcat 
         FROM budget LEFT JOIN Bcateg ON budget.BcatId = Bcateg.id) t 
-        LEFT JOIN Bacnt ON t.BaccountId = Bacnt.id;
+        LEFT JOIN Bacnt ON t.BaccountId = Bacnt.id
+        ORDER BY t.Bdate DESC;
         `;
       } else {
         queryStr = 'SELECT * FROM ' +  str;
