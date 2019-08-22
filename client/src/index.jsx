@@ -115,16 +115,17 @@ class App extends React.Component {
       label: "SomethingA",
       values: format.pieFormat(this.state.filtered)
     };
-    var sort = null;
+    var sort = d3.ascending;
     var tooltipPie = function(x, y) {
       let str = `${x.toString()}: $${y.toString()}`;
       return str;
     };
-    // console.log(format.pieFormat(this.state.entries));
+    // console.log(PieChart);
     return (
       <div>
         <header>
           <h1>Budget Tracker</h1>
+          <h2>Balance: {format.findBalance(this.state.entries)}</h2>
         </header>
 
         <div class="chart">
