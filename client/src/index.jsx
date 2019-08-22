@@ -148,7 +148,7 @@ class App extends React.Component {
       <div>
         <header>
           <h1>Budget Tracker</h1>
-          <h2>Balance: {format.findBalance(this.state.entries)}</h2>
+          <h2 class="balanceline">Balance: {format.findBalance(this.state.entries)}</h2>
         </header>
 
         <div class="chart">
