@@ -45,5 +45,17 @@ module.exports = {
       formattedArr.push(formatted);
     }
     return formattedArr;
+  },
+  findBalance: (arr) => {
+    let total = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i]["Transaction Type"] === "debit") {
+        total -= arr[i]["Amount"];
+      }
+      if (arr[i]["Transaction Type"] === "credit") {
+        total += arr[i]["Amount"];
+      }
+    }
+    return total.toFixed(2);
   }
 }
