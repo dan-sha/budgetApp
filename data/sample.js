@@ -1,5 +1,3 @@
-// const mysql = require('mysql');
-
 let sampleData = [
     {
       "Date": "01/01/2019",

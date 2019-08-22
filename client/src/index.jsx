@@ -62,7 +62,6 @@ class App extends React.Component {
 
   getAccounts() {
     Axios.get("/budget/allAccounts").then(data => {
-      console.log(data);
       let tempObj2 = { accounts: data.data };
       this.setState(tempObj2);
     });

@@ -15,12 +15,10 @@ class List extends React.Component {
     this.setState({
       selected: event.target.value
     });
-    console.log(event.target.value);
     this.props.filterCategories(event.target.value);
   }
 
   onChangeAccounts(event) {
-    console.log(event.target.value);
     this.props.filterAccounts(event.target.value);
   }
 
