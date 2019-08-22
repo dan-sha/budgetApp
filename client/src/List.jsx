@@ -30,10 +30,14 @@ class List extends React.Component {
   render() {
     return (
       <div class="list">
-        <h3>Recent Transactions:</h3>
-        <label>
-          Categories
-          <select onChange={this.onChange} value={this.state.selected}>
+        <h3 class="transaction">Recent Transactions:</h3>
+        <label class="labelname">
+          Categories:
+          <select
+            class="dropdown"
+            onChange={this.onChange}
+            value={this.state.selected}
+          >
             {this.props.categories.map((category, index) => {
               return (
                 <option value={category.Bcat} key={index}>
@@ -43,9 +47,9 @@ class List extends React.Component {
             })}
           </select>
         </label>
-        <label>
-          Accounts
-          <select onChange={this.onChangeAccounts}>
+        <label class="labelname">
+          Accounts:
+          <select class="dropdown" onChange={this.onChangeAccounts}>
             {this.props.accounts.map(account => {
               return (
                 <option value={account.Baccount}>{account.Baccount}</option>
