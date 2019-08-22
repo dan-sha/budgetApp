@@ -114,9 +114,13 @@ class App extends React.Component {
     var PieChart = ReactD3.PieChart;
     var data = {
       label: 'SomethingA',
-      values: format.pieFormat(this.state.entries)
+      values: format.pieFormat(this.state.filtered)
     };
     var sort = null;
+    var tooltipPie = function(x, y) {
+      let str = `${x.toString()}: $${y.toString()}`;
+      return str;
+    };
     // console.log(format.pieFormat(this.state.entries));
     return (
       <div>
@@ -127,10 +131,13 @@ class App extends React.Component {
         <div>
           <PieChart
             data={data}
-            width={600}
-            height={400}
+            width={800}
+            height={600}
             margin={{top: 10, bottom: 10, left: 100, right: 100}}
             sort={sort}
+            tooltipOffset={{top: 530, left: 300}}
+            tooltipMode={'fixed'}
+            tooltipHtml={tooltipPie}
           />
           <Form onSubmit={this.getEntries} reRender={this.reRender} />
           <List

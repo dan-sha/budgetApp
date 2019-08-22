@@ -22,10 +22,26 @@ module.exports = {
   pieFormat: (arr) => {
     let formattedArr = [];
     let formatted = {};
+    let tally = {};
     for (let i = 0; i < arr.length; i++) {
+      if(!tally[arr[i]["Category"]]) {
+        tally[arr[i]["Category"]] = 0;
+      }
+      tally[arr[i]["Category"]] += arr[i]["Amount"];
+    }
+    if (Object.keys(tally).length === 1) {
+      tally = {};
+      for (let i = 0; i < arr.length; i++) {
+        if(!tally[arr[i]["Description"]]) {
+          tally[arr[i]["Description"]] = 0;
+        }
+        tally[arr[i]["Description"]] += arr[i]["Amount"];
+      }
+    }
+    for (let i in tally) {
       formatted = {};
-      formatted["x"] = arr[i]["Category"];
-      formatted["y"] = arr[i]["Amount"];
+      formatted["x"] = i;
+      formatted["y"] = tally[i].toFixed(2);
       formattedArr.push(formatted);
     }
     return formattedArr;
