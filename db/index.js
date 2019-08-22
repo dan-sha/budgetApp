@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 const { sqlUri } = require("./config.js");
 
-// const connection = mysql.createConnection('postgres://ztsegicdplvcyw:c02474e1e69445c2de0647dd735155d0bc674ce389f5cf0ff530983a66a8cd31@ec2-54-243-243-76.compute-1.amazonaws.com:5432/dcipaqanpgck2');
 const connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
+  user: "student",
+  password: "student",
   database: "budget",
   multipleStatements: true
 });
@@ -17,8 +17,7 @@ connection.connect(err => {
   }
 });
 
-// let createDB = `CREATE DATABASE IF NOT EXISTS budget`;
-// let createDB = `USE dcipaqanpgck2`;
+let createDB = `CREATE DATABASE IF NOT EXISTS budget`;
 
 let createTable = `CREATE TABLE IF NOT EXISTS budget (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -44,14 +43,15 @@ let createAcc = `CREATE TABLE IF NOT EXISTS Bacnt (
     UNIQUE KEY(Baccount)
 );`;
 
-// connection.query(createDB, [], (err, results) => {
-//   if (err) {
-//     console.log('DB Creation error');
-//     console.log(err);
-//   } else {
-//     console.log('DB created');
-//   }
-// });
+connection.query(createDB, [], (err, results) => {
+  if (err) {
+    console.log('DB Creation error');
+    console.log(err);
+  } else {
+    console.log('DB created');
+  }
+});
+
 connection.query(createAcc, [], (err, results) => {
   if (err) {
     console.log("Table creation error");

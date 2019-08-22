@@ -77,13 +77,14 @@ button {
 }
 
 .arc text {
-  font: 11px sans-serif;
+  font: 15px sans-serif;
   fill: #000;
   stroke: none;
   font-weight: bold;
 }
 
 .tooltip {
+  font: 20px sans-serif;
   color: black;
   padding: 3px;
   border: 2px solid;

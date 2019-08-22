@@ -9,7 +9,7 @@ class Search extends React.Component {
   }
 
   render() {
-    //console.log here to check props before passing down
+
     return (
       <div className="search">
         <select onChange={this.props.selectCategory}>
