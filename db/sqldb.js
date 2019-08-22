@@ -1,10 +1,9 @@
 const db = require('./index.js');
-// const mysql = require('mysql');
-const {sqlUri} = require('./config');
 
 module.exports = {
 
   budget: {
+    
     test: function(query, callback) {
       db.connection.query(query, [], (err, results) => {
         if (err) {

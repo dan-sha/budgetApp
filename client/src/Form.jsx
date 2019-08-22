@@ -46,7 +46,6 @@ class Form extends React.Component {
         this.setState(temp);
       })
       .then(() => {
-        console.log("1232454");
         this.props.reRender();
       })
       .catch(err => {

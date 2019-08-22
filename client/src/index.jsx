@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "../dist/styles.css";
 import Form from "./Form.jsx";
 import List from "./List.jsx";
-// import PieChart from "./PieChart.jsx";
 const Axios = require("axios");
 const d3 = require("d3");
 const ReactD3 = require("react-d3-components");
@@ -20,17 +19,7 @@ class App extends React.Component {
       selectedCategory: "",
       accounts: [],
       filtered: [],
-      entries: [
-        // {
-        //   date: "",
-        //   description: "",
-        //   amount: "",
-        //   transactionType: "",
-        //   accountName: "",
-        //   category: ""
-        //   // setRadioButton: ""
-        // }
-      ]
+      entries: []
     };
 
     //bind methods here:
@@ -73,7 +62,6 @@ class App extends React.Component {
 
   getAccounts() {
     Axios.get("/budget/allAccounts").then(data => {
-      console.log(data);
       let tempObj2 = { accounts: data.data };
       this.setState(tempObj2);
     });
@@ -103,13 +91,6 @@ class App extends React.Component {
     this.setState({ filtered: temp });
   }
 
-  // var PieChart = ReactD3.PieChart;
-  // var data = {
-  //   label: 'somethingA',
-  //   values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
-  // };
-  // var sort = null;
-
   render() {
     var PieChart = ReactD3.PieChart;
     var data = {
@@ -121,7 +102,7 @@ class App extends React.Component {
       let str = `${x.toString()}: $${y.toString()}`;
       return str;
     };
-    // console.log(PieChart);
+
     let chart = null;
     if (this.state.entries.length === 0) {
       chart = (
@@ -175,22 +156,3 @@ class App extends React.Component {
 
 var mountNode = document.getElementById("app");
 ReactDOM.render(<App />, mountNode);
-
-// var PieChart = ReactD3.PieChart;
-
-// var data = {
-//         label: 'somethingA',
-//         values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
-// };
-
-// var sort = null; // d3.ascending, d3.descending, func(a,b) { return a - b; }, etc...
-
-// ReactDOM.render(<PieChart
-//                 data={data}
-//                 width={600}
-//                 height={400}
-//                 margin={{top: 10, bottom: 10, left: 100, right: 100}}
-//                 sort={sort}
-//                 />,
-//             document.getElementById('piechart')
-// );
