@@ -1,23 +1,22 @@
-
 * {
   box-sizing: border-box;
 }
 
 .container {
-	text-align: center;
-	margin: auto;
+  text-align: center;
+  margin: auto;
 }
 
 body {
   color: orange;
   background-color: white;
   font-family: Andale Mono, sans-serif;
-  text-align: center
+  text-align: center;
 }
 
 h1 {
   font-size: 88px;
-  text-align: center
+  text-align: center;
 }
 
 .chart {
@@ -31,9 +30,8 @@ form {
 
 input {
   font-size: 20px;
-	border-radius: 5px;
+  border-radius: 5px;
 }
-  
 
 button {
   text-align: center;
@@ -44,11 +42,11 @@ button {
 
 #entrylist {
   border: solid 3px silver;
-	border-radius: 5px;
-	background-color: white;
-	display: inline-block;
-	width: 600px;
-	margin: 20px;
+  border-radius: 5px;
+  background-color: white;
+  display: inline-block;
+  width: 600px;
+  margin: 20px;
   text-align: left;
 }
 
@@ -56,10 +54,9 @@ button {
   text-align: center;
 }
 
-
 #footer {
   font-family: Andale Mono, sans-serif;
-	font-size: 10px;
+  font-size: 10px;
   color: #464343;
-	text-align: center;
+  text-align: center;
 }
