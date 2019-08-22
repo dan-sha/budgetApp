@@ -62,23 +62,35 @@ button {
 }
 
 .arc path:hover {
-	fill: #E55;
+  fill: #e55;
 }
 
 .arc text {
-	font: 11px sans-serif;
-	fill: #000;
-	stroke: none;
-	font-weight: bold;
+  font: 11px sans-serif;
+  fill: #000;
+  stroke: none;
+  font-weight: bold;
 }
 
 .tooltip {
   color: black;
-	padding: 3px;
-	border: 2px solid;
-	border-radius: 4px;
-	background-color: #eee;
-	opacity: 0.6;
-	justify-content: center;
-	align-items: center;
+  padding: 3px;
+  border: 2px solid;
+  border-radius: 4px;
+  background-color: #eee;
+  opacity: 0.6;
+  justify-content: center;
+  align-items: center;
+}
+
+.transaction {
+  color: #464343;
+}
+
+.dropdown {
+  font-size: 18px;
+}
+
+.labelname {
+  font-size: 20px;
 }
