@@ -18,5 +18,16 @@ module.exports = {
     }
     // console.log(formattedArr);
     return formattedArr;
+  },
+  pieFormat: (arr) => {
+    let formattedArr = [];
+    let formatted = {};
+    for (let i = 0; i < arr.length; i++) {
+      formatted = {};
+      formatted["x"] = arr[i]["Category"];
+      formatted["y"] = arr[i]["Amount"];
+      formattedArr.push(formatted);
+    }
+    return formattedArr;
   }
 }
