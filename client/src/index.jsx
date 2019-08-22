@@ -5,6 +5,7 @@ import Form from "./Form.jsx";
 import List from "./List.jsx";
 const Axios = require("axios");
 import helpers from "../../server/Helpers/filter.js";
+import { runInThisContext } from "vm";
 
 class App extends React.Component {
   constructor(props) {
@@ -118,6 +119,7 @@ class App extends React.Component {
             filterCategories={this.filterCategories}
             filterAccounts={this.filterAccounts}
           />
+          <SimplePieChart />
         </div>
       </div>
     );
