@@ -21,15 +21,15 @@ class App extends React.Component {
       accounts: [],
       filtered: [],
       entries: [
-        {
-          date: "",
-          description: "",
-          amount: "",
-          transactionType: "",
-          accountName: "",
-          category: ""
-          // setRadioButton: ""
-        }
+        // {
+        //   date: "",
+        //   description: "",
+        //   amount: "",
+        //   transactionType: "",
+        //   accountName: "",
+        //   category: ""
+        //   // setRadioButton: ""
+        // }
       ]
     };
 
@@ -82,7 +82,8 @@ class App extends React.Component {
   reRender() {
     this.getEntries((err, results) => {
       this.setState({
-        entries: results
+        entries: results,
+        filtered: results
       });
     });
     this.getCategories();
@@ -121,6 +122,13 @@ class App extends React.Component {
       return str;
     };
     // console.log(PieChart);
+    let chart = null;
+    if (this.state.entries.length === 0) {
+      chart = <div><img src="goldencoin.png" height="40%" width="40%"></img></div>;
+    } else {
+      chart = <PieChart data={data} width={800} height={600} margin={{ top: 10, bottom: 10, left: 100, right: 100 }} sort={sort} tooltipOffset={{ top: 530, left: 300 }} tooltipMode={"fixed"} tooltipHtml={tooltipPie} />;
+    }
+
     return (
       <div>
         <header>
@@ -129,18 +137,9 @@ class App extends React.Component {
         </header>
 
         <div class="chart">
-          <PieChart
-            data={data}
-            width={800}
-            height={600}
-            margin={{ top: 10, bottom: 10, left: 100, right: 100 }}
-            sort={sort}
-            tooltipOffset={{ top: 530, left: 300 }}
-            tooltipMode={"fixed"}
-            tooltipHtml={tooltipPie}
-          />
+          {chart}
           <div class="form">
-            <Form onSubmit={this.getEntries} reRender={this.reRender} />
+            <Form entries={this.state.filtered} onSubmit={this.getEntries} reRender={this.reRender} />
           </div>
           <List
             entries={this.state.filtered}
