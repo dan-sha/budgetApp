@@ -1,6 +1,13 @@
-# empty-project
+# Budget tracking app
 
-Empty project.
+A MVP budget tracking app utilizing React and D3 for the front-end client, and MySQL DB.
+Created as a pair at HackReactor for in-house hackathon.
+
+Accepts inputs for date, description, amount, transaction type, category and account name, and saves information to a SQL database.
+
+Stored information is displayed as a pie chart, showing distribution of funds based on category. It is also displayed in detail below input form as a descending list based on date.
+
+Information can be filtered by category or account.
 
 ## Building and running on localhost
 
@@ -34,4 +41,5 @@ Open the file `dist/index.html` in your browser
 
 ## Credits
 
-Made with [createapp.dev](https://createapp.dev/)
+App written by Brittany Yee and Daniel Sha.
+Environment setup made with [createapp.dev](https://createapp.dev/)
